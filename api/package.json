@@ -1,0 +1,36 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "lint:eslint": "eslint --ext .ts,.tsx src",
+    "lint:ts": "tsc --noEmit --pretty --project .",
+    "lint:format": "prettier --check 'src/**/*'",
+    "lint:format:fix": "prettier --write 'src/**/*}'",
+    "lint": "yarn lint:eslint && yarn lint:ts && yarn lint:format",
+    "build": "babel src --out-dir dist --extensions \".ts\"",
+    "start": "babel-node --extensions \".ts\" src/index.ts"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.7",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.23.7",
+    "@babel/preset-typescript": "^7.23.3",
+    "@types/lodash-es": "^4.17.7",
+    "@types/node": "^20.10.6",
+    "@types/ws": "^8.5.10",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^9.1.0",
+    "express": "^4.18.2",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "ts-pattern": "^5.0.1",
+    "ts-toolbelt": "^9.6.0"
+  }
+}
