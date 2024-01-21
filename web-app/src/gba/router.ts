@@ -1,5 +1,6 @@
-import { GbaSerial } from "./gba";
 import { match } from "ts-pattern";
+import { GbaSerial } from "./gba";
+import { socket } from "../socket";
 
 type Context = {
   someValue: number;
@@ -26,6 +27,7 @@ export async function handleRequest(
   }
 
   const updatedContext = { ...context };
+  socket.emit(req.command, new Uint8Array(req.payload.buffer));
   const response: Uint32Array = match(req.command)
     .with("Init1", emptyResponse)
     .with("Init2", emptyResponse)
