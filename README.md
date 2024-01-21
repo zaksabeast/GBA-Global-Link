@@ -40,11 +40,11 @@ Connecting to the pico:
 
 ## Development
 
-You'll need rust, yarn, and node to build this project.
+You'll need rust and bun to build this project.
 
 1. Push and hold the BOOTSEL button on the pico and plug it into your computer
 2. Run `cargo run --release` to flash the pico
-3. Run `yarn start` in the `web-app` and `api` directories
+3. Run `bun start` in the `web-app` and `api` directories
 4. Use the web app with a web usb enabled browser and use the UI to connect with the pico
 5. Enter the union room in a Pokemon game and watch the magic
 

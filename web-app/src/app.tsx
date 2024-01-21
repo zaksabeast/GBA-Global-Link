@@ -38,7 +38,7 @@ function useGba(): {
     } catch {
       // Typically no device selected
     }
-  }, []);
+  }, [disconnect]);
 
   return {
     openDevice,
