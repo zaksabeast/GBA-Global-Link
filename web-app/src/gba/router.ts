@@ -1,6 +1,6 @@
 import { match } from "ts-pattern";
 import { GbaSerial } from "./gba";
-import { socket } from "../socket";
+import { emitCommand, getBroadcasts } from "../socket";
 
 type Context = {
   someValue: number;
@@ -27,13 +27,12 @@ export async function handleRequest(
   }
 
   const updatedContext = { ...context };
-  socket.emit(req.command, new Uint8Array(req.payload.buffer));
   const response: Uint32Array = match(req.command)
     .with("Init1", emptyResponse)
     .with("Init2", emptyResponse)
     .with("Unknown", handleUnknown)
     .with("GetSomeValue", () => handleGetSomeValue(updatedContext))
-    .with("Broadcast", emptyResponse)
+    .with("Broadcast", () => handleBroadcast(req.payload))
     .with("Setup", emptyResponse)
     .with("StartHost", emptyResponse)
     .with("AcceptConnections", emptyResponse)
@@ -72,8 +71,16 @@ function handleGetSomeValue(context: Context) {
   return Uint32Array.from([context.someValue]);
 }
 
-function handleRecvBroadcast() {
+function handleBroadcast(input: Uint32Array) {
+  emitCommand({
+    op: "RecvBroadcastFromUser",
+    payload: [...input],
+  });
   return Uint32Array.from([]);
+}
+
+function handleRecvBroadcast() {
+  return Uint32Array.from(getBroadcasts());
 }
 
 function handleConnect(input: Uint32Array) {
