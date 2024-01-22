@@ -53,9 +53,9 @@ You'll need rust and bun to build this project.
 The wireless adapter is broken into several layers:
 
 - SPI (Serial Peripheral Interface)
-- GPI (GBA Peripheral Interface)
-- WAP (Wireless Adapter Protocol)
-- Adapter Router
+- GPI (GBA Peripheral Interface, adds ack and ready signals on top of SPI)
+- WAP (Wireless Adapter Protocol, adds packets on top of GPI)
+- Adapter Router (Adds command handling)
 
 This is similar to TCP -> HTTP -> HTTPS -> REST/GraphQL/etc.
 
