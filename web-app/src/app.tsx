@@ -71,7 +71,7 @@ export function App() {
     }
 
     loop();
-    () => {
+    return () => {
       shouldRun = false;
     };
   }, [gba]);
